@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Game Dev - P1</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Introduced in HTML 5 that creates a canvas we can use to draw interactive graphics with JS -->
+    <!-- By default, canvas elements are transparent, so you can layer multiple canvas elements if you want to -->
+    <canvas id="canvas1"></canvas>
+    <div class="controls">
+        <label for="animations" name="animations">Choose a Vibe:</label>
+        <select id="animations" name="animations">
+            <option value="idle">We're feeling...</option>
+            <option value="jump">Jump</option>
+            <option value="fall">Fall</option>
+            <option value="run">Run</option>
+            <option value="dizzy">Dizzy</option>
+            <option value="sit">Sit</option>
+            <option value="roll">Roll</option>
+            <option value="bite">Bite</option>
+            <option value="ko">KO</option>
+            <option value="getHit">Get Hit</option>
+        </select>
+    </div>
+
+    <!-- JS needs to come last to make sure it sees the canvas -->
+    <script src="script.js"></script>
+</body>
+</html>
