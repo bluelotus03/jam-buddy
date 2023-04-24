@@ -41,7 +41,7 @@ const spriteHeight = 523;
 gameFrame = 0;
 
 // Will slow down animation by that amount -- higher the number, the slower the animation will be 
-const staggerFrames = 24;
+const staggerFrames = 10;
 
 // Stores all the positions of sprites for a given animation (row) as calculated in forEach() below
 const spriteAnimations = [];
@@ -50,44 +50,20 @@ const spriteAnimations = [];
 const animationStates = [
     {
         name: 'idle',
-        numOfFrames: 4,
-    },
-    {
-        name: 'jump',
-        numOfFrames: 7,
-    }, 
-    {
-        name: 'fall',
-        numOfFrames: 7,
-    },
-    {
-        name: 'run',
-        numOfFrames: 9,
-    },
-    {
-        name: 'dizzy',
-        numOfFrames: 11,
-    },
-    {
-        name: 'sit',
-        numOfFrames: 5,
-    },
-    {
-        name: 'roll',
-        numOfFrames: 7,
-    },
-    {
-        name: 'bite',
-        numOfFrames: 7,
-    },
-    {
-        name: 'ko',
         numOfFrames: 12,
     },
     {
-        name: 'getHit',
-        numOfFrames: 4,
-    }
+        name: 'sad',
+        numOfFrames: 12,
+    }, 
+    {
+        name: 'happy',
+        numOfFrames: 10,
+    },
+    {
+        name: 'rage',
+        numOfFrames: 12,
+    },
 ];
 
 // This callback function will run for each element in the animationStates array
