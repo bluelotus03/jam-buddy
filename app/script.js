@@ -28,7 +28,7 @@ const CANVAS_HEIGHT = canvas.height = 600;
 // This Image class will create an image element
 const playerImage = new Image();
 
-playerImage.src = 'po_animations.png';
+playerImage.src = 'po-animations.png';
 
 // If take entire file and divide width by the number of columns --> get width of 1 frame
 // This sprite sheet is 6876px wide and has 12 columns --> 573px (going to use 575px for now - last frame is a bit smaller and margin isn't perfect)
