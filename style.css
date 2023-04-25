@@ -33,16 +33,11 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    flex: 1;
-}
-
-.title {
-    padding-bottom: 5rem;
 }
 
 .title_image {
-    max-width: 50%;
-    /* height: 2rem; */
+    max-width: 75%;
+    padding-bottom: 5rem;
 }
 
 .title_button {
