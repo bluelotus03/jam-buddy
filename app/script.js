@@ -101,25 +101,56 @@ function selectTime(timeValue) {
     timeDropdown.value = timeValue;
 }
 
-/* -------------  SONG STATES LOGIC ---------- */
-// TODO
+/* -------------  SONG PACE STATES LOGIC ---------- */
+
+const paceDropdown = document.getElementById('pace');
+let paceValue = paceDropdown.value;
+
+let paceFrames = 0;
+
+function setPaceFrames(value) { 
+
+    // When the event listener detects a change, playerState is set to that new value
+    paceValue = value;
+
+    if (playerState == 'rage') {
+        switch (paceValue) {
+            case 'chill':
+                paceFrames = 10;
+                break;
+            case 'upbeat':
+                paceFrames = -5;
+                break;
+            case 'hardcore':
+                paceFrames = 0;
+                break;
+        }
+    } else {
+        switch (paceValue) {
+            case 'chill':
+                paceFrames = 10;
+                break;
+            case 'upbeat':
+                paceFrames = -5;
+                break;
+            case 'hardcore':
+                paceFrames = -8;
+                break;
+        }
+    }
+    console.log(paceValue, paceFrames);
+}
+
 
 
 /* -------------  ANIMATION STATES LOGIC ---------- */
 
 // Default state
 let playerState = 'idle';
+let defaultPace = 10;
 
 // Gets the dropdown element
 const dropdown = document.getElementById('animations');
-
-// Use event listener to detect change in the dropdown
-dropdown.addEventListener('change', function(e){
-
-    // When the event listener detects a change, playerState is set to that new value
-    playerState = e.target.value;
-
-});
 
 // You could also pass webgl to get access to a different set of methods
 const ctx = canvas.getContext('2d');
@@ -145,9 +176,6 @@ const spriteHeight = 523;
 // Used to count frame rate and work with staggerFrames in the animate() function
 gameFrame = 0;
 
-// Will slow down animation by that amount -- higher the number, the slower the animation will be 
-const staggerFrames = 10;
-
 // Stores all the positions of sprites for a given animation (row) as calculated in forEach() below
 const spriteAnimations = [];
 
@@ -156,20 +184,45 @@ const animationStates = [
     {
         name: 'idle',
         numOfFrames: 12,
+        defaultPace: defaultPace,
     },
     {
         name: 'sad',
         numOfFrames: 12,
+        defaultPace: 10,
     }, 
     {
         name: 'happy',
         numOfFrames: 10,
+        defaultPace: 20,
     },
     {
         name: 'rage',
         numOfFrames: 12,
+        defaultPace: 50,
     },
 ];
+
+let staggerFrames = defaultPace + paceFrames;
+
+// Use event listener to detect change in the dropdown
+dropdown.addEventListener('change', function(e){
+
+    // When the event listener detects a change, playerState is set to that new value
+    playerState = e.target.value;
+
+    // Will slow down animation by that amount -- higher the number, the slower the animation will be 
+    defaultPace = animationStates.filter(currentState => currentState.name == playerState)[0].defaultPace;
+
+});
+
+
+// Use event listener to detect change in the dropdown
+paceDropdown.addEventListener('change', function(e){
+    setPaceFrames(e.target.value);
+    staggerFrames = defaultPace + paceFrames;
+});
+
 
 // This callback function will run for each element in the animationStates array
 animationStates.forEach((state, index) => {
