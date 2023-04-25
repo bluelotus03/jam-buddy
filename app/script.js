@@ -32,6 +32,8 @@ let timeInterval = 'default';
 let countTime = 0;
 
 const timeDropdown = document.getElementById('time');
+const timerStartButton = document.getElementById('startTime');
+const timerStopButton = document.getElementById('stopTime');
 
 // Use event listener to detect change in the dropdown
 timeDropdown.addEventListener('change', function(e){
@@ -39,31 +41,49 @@ timeDropdown.addEventListener('change', function(e){
     // When the event listener detects a change, timeInterval is set to that new value
     timeInterval = e.target.value;
 
-    switch(timeInterval) {
-        case '10sec':
-            countTime = 10000;
-            break;
-        case '1min':
-            countTime = 60000;
-            break;
-        case '5min':
-            countTime = 300000;
-            break;
-        case '10min':
-            countTime = 600000;
-            break;
-    }
+    if (timeInterval == 'default') {
+        console.log('Switched to timeless.. nothing to do here');
 
-    const timerButton = document.getElementById('startTime');
-    timerButton.style.visibility = 'visible';
-    timerButton.style.display = 'block';
+    } else {
+        switch(timeInterval) {
+            case '10sec':
+                countTime = 10000;
+                break;
+            case '1min':
+                countTime = 60000;
+                break;
+            case '5min':
+                countTime = 300000;
+                break;
+            case '10min':
+                countTime = 600000;
+                break;
+        }
+
+        timerStartButton.style.visibility = 'visible';
+        timerStartButton.style.display = 'block';
+    }
 
 });
 
-const startTimeButton = document.getElementById('startTimer');
+let timeStatus;
 
 function startTime() {
-    setTimeout(goToEndPage, countTime);
+    timeStatus = setTimeout(goToEndPage, countTime);
+    timerStopButton.style.visibility = 'visible';
+    timerStopButton.style.display = 'block';
+}
+
+function stopTime() {
+    timerStartButton.style.visibility = 'hidden';
+    timerStartButton.style.display = 'none';
+
+    timerStopButton.style.visibility = 'hidden';
+    timerStopButton.style.display = 'none';
+
+    clearTimeout(timeStatus);
+
+    selectTime('default');
 }
 
 function goToEndPage() {
@@ -71,10 +91,9 @@ function goToEndPage() {
     window.location = '/';
 }
 
-
-
-
-
+function selectTime(timeValue) {
+    timeDropdown.value = timeValue;
+}
 
 
 /* -------------  SONG STATES LOGIC ---------- */

@@ -15,16 +15,16 @@
         <!-- Introduced in HTML 5 that creates a canvas we can use to draw interactive graphics with JS -->
         <!-- By default, canvas elements are transparent, so you can layer multiple canvas elements if you want to -->
         <div class="meta_wrapper">
-            <div class="controls">
-                <label for="songs" name="songs">Choose a Jam:</label>
-                <select id="songs" name="songs">
-                    <option value="idle">Let's listen to..</option>
-                    <option value="sad">Indie Song</option>
-                    <option value="happy">Pop Song</option>
-                    <option value="rage">Rock Song</option>
-                </select>
-            </div>
             <div class="controls_wrapper">
+                <div class="controls">
+                    <label for="songs" name="songs">Choose a Jam:</label>
+                    <select id="songs" name="songs">
+                        <option value="idle">Let's listen to..</option>
+                        <option value="sad">Indie Song</option>
+                        <option value="happy">Pop Song</option>
+                        <option value="rage">Rock Song</option>
+                    </select>
+                </div>
                 <div class="controls">
                     <label for="animations" name="animations">Choose a Vibe:</label>
                     <select id="animations" name="animations">
@@ -45,6 +45,7 @@
                     <option value="10min">10 minutes</option>
                 </select>
                 <button id="startTime" onclick="startTime()">Start Time</button>
+                <button id="stopTime" onclick="stopTime()">Stop Time</button>
             </div>
         </div>
         <canvas class="canvas" id="canvas1"></canvas>
