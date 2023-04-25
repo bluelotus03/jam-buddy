@@ -49,6 +49,9 @@ timeDropdown.addEventListener('change', function(e){
             case '10sec':
                 countTime = 10000;
                 break;
+            case '30sec':
+                countTime = 30000;
+                break;
             case '1min':
                 countTime = 60000;
                 break;
@@ -68,10 +71,13 @@ timeDropdown.addEventListener('change', function(e){
 
 let timeStatus;
 
+// Learned about setTimeout with https://www.w3schools.com/js/tryit.asp?filename=tryjs_settimeout2
 function startTime() {
     timeStatus = setTimeout(goToEndPage, countTime);
     timerStopButton.style.visibility = 'visible';
     timerStopButton.style.display = 'block';
+
+    console.log('Starting time for ' + timeInterval);
 }
 
 function stopTime() {
@@ -94,7 +100,6 @@ function goToEndPage() {
 function selectTime(timeValue) {
     timeDropdown.value = timeValue;
 }
-
 
 /* -------------  SONG STATES LOGIC ---------- */
 // TODO
