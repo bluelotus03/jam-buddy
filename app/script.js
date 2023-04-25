@@ -1,3 +1,26 @@
+let cookies = document.cookie;
+const canvas = document.getElementById('canvas1');
+const meta_wrapper = document.querySelector('.meta_wrapper')
+var dialog = document.querySelector('dialog');
+
+show_app_info = function() {
+    canvas.style.display = 'block';
+    canvas.style.visibility = 'visible';
+    meta_wrapper.style.display = 'flex';
+    meta_wrapper.style.visibility = 'visible';
+}
+
+if (cookies.split(';').some((item) => item.trim().startsWith('accepted='))) {
+    dialog.close();
+    show_app_info();
+} else {
+    dialog.show();
+    document.querySelector('#close').onclick = function() {
+        dialog.close();
+        show_app_info();
+        document.cookie = 'accepted=true';
+    };
+}
 // Default state
 playerState = 'idle';
 
@@ -12,8 +35,6 @@ dropdown.addEventListener('change', function(e){
     playerState = e.target.value;
 
 })
-
-const canvas = document.getElementById('canvas1');
 
 // You could also pass webgl to get access to a different set of methods
 const ctx = canvas.getContext('2d');
@@ -144,5 +165,3 @@ function animate() {
 }
 
 animate();
-
-
