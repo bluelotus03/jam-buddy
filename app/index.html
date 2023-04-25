@@ -7,26 +7,39 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Introduced in HTML 5 that creates a canvas we can use to draw interactive graphics with JS -->
-    <!-- By default, canvas elements are transparent, so you can layer multiple canvas elements if you want to -->
-    <canvas id="canvas1"></canvas>
-    <div class="controls">
-        <label for="animations" name="animations">Choose a Vibe:</label>
-        <select id="animations" name="animations">
-            <option value="idle">We're feeling...</option>
-            <option value="sad">Sad</option>
-            <option value="happy">Happy</option>
-            <option value="rage">Rage</option>
-        </select>
-    </div>
-    <div class="controls">
-        <label for="songs" name="songs">Choose a Jam:</label>
-        <select id="songs" name="songs">
-            <option value="idle">Let's listen to..</option>
-            <option value="sad">Indie Song</option>
-            <option value="happy">Pop Song</option>
-            <option value="rage">Rock Song</option>
-        </select>
+    <div class="main_wrapper">
+        <dialog>
+            <p>This is a dialog</p>
+            <button id="close">Close dialog</button>
+        </dialog>
+        <!-- Introduced in HTML 5 that creates a canvas we can use to draw interactive graphics with JS -->
+        <!-- By default, canvas elements are transparent, so you can layer multiple canvas elements if you want to -->
+        <div class="meta_wrapper">
+            <div class="controls_wrapper">
+                <div class="controls">
+                    <label for="animations" name="animations">Choose a Vibe:</label>
+                    <select id="animations" name="animations">
+                        <option value="idle">We're feeling...</option>
+                        <option value="sad">Sad</option>
+                        <option value="happy">Happy</option>
+                        <option value="rage">Rage</option>
+                    </select>
+                </div>
+                <div class="controls">
+                    <label for="songs" name="songs">Choose a Jam:</label>
+                    <select id="songs" name="songs">
+                        <option value="idle">Let's listen to..</option>
+                        <option value="sad">Indie Song</option>
+                        <option value="happy">Pop Song</option>
+                        <option value="rage">Rock Song</option>
+                    </select>
+                </div>
+            </div>
+            <div class="countdown_wrapper">
+                <div class="countdown">COUNTDOWN!!!</div>
+            </div>
+        </div>
+        <canvas class="canvas" id="canvas1"></canvas>
     </div>
 
 
