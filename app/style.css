@@ -39,3 +39,8 @@
 .controls, select, option {
     font-size: 20px;
 }
+
+#startTime {
+    display: none;
+    visibility: hidden;
+}

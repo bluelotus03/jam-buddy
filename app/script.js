@@ -28,6 +28,53 @@ if (cookies.split(';').some((item) => item.trim().startsWith('accepted='))) {
 }
 
 /* -------------  COUNTDOWN LOGIC ---------- */
+let timeInterval = 'default';
+let countTime = 0;
+
+const timeDropdown = document.getElementById('time');
+
+// Use event listener to detect change in the dropdown
+timeDropdown.addEventListener('change', function(e){
+
+    // When the event listener detects a change, timeInterval is set to that new value
+    timeInterval = e.target.value;
+
+    switch(timeInterval) {
+        case '10sec':
+            countTime = 10000;
+            break;
+        case '1min':
+            countTime = 60000;
+            break;
+        case '5min':
+            countTime = 300000;
+            break;
+        case '10min':
+            countTime = 600000;
+            break;
+    }
+
+    const timerButton = document.getElementById('startTime');
+    timerButton.style.visibility = 'visible';
+    timerButton.style.display = 'block';
+
+});
+
+const startTimeButton = document.getElementById('startTimer');
+
+function startTime() {
+    setTimeout(goToEndPage, countTime);
+}
+
+function goToEndPage() {
+    // nav to end page
+    window.location = '/';
+}
+
+
+
+
+
 
 
 /* -------------  SONG STATES LOGIC ---------- */
@@ -37,7 +84,7 @@ if (cookies.split(';').some((item) => item.trim().startsWith('accepted='))) {
 /* -------------  ANIMATION STATES LOGIC ---------- */
 
 // Default state
-playerState = 'idle';
+let playerState = 'idle';
 
 // Gets the dropdown element
 const dropdown = document.getElementById('animations');
@@ -48,7 +95,7 @@ dropdown.addEventListener('change', function(e){
     // When the event listener detects a change, playerState is set to that new value
     playerState = e.target.value;
 
-})
+});
 
 // You could also pass webgl to get access to a different set of methods
 const ctx = canvas.getContext('2d');
