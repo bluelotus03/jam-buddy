@@ -77,7 +77,7 @@ function startTime() {
     timerStopButton.style.visibility = 'visible';
     timerStopButton.style.display = 'block';
 
-    console.log('Starting time for ' + timeInterval);
+    console.log('Starting timer for ' + timeInterval);
 }
 
 function stopTime() {
@@ -87,6 +87,7 @@ function stopTime() {
     timerStopButton.style.visibility = 'hidden';
     timerStopButton.style.display = 'none';
 
+    console.log('Stopping timer');
     clearTimeout(timeStatus);
 
     selectTime('default');
@@ -113,7 +114,19 @@ function setPaceFrames(value) {
     // When the event listener detects a change, playerState is set to that new value
     paceValue = value;
 
-    if (playerState == 'rage') {
+    if (playerState == 'happy') {
+        switch (paceValue) {
+            case 'chill':
+                paceFrames = 10;
+                break;
+            case 'upbeat':
+                paceFrames = -3;
+                break;
+            case 'hardcore':
+                paceFrames = -10;
+                break;
+        }
+    } else if (playerState == 'sad') {
         switch (paceValue) {
             case 'chill':
                 paceFrames = 10;
@@ -125,7 +138,8 @@ function setPaceFrames(value) {
                 paceFrames = 0;
                 break;
         }
-    } else {
+    }  
+    else if (playerState == 'rage') {
         switch (paceValue) {
             case 'chill':
                 paceFrames = 10;
@@ -134,10 +148,10 @@ function setPaceFrames(value) {
                 paceFrames = -5;
                 break;
             case 'hardcore':
-                paceFrames = -8;
+                paceFrames = 0;
                 break;
         }
-    }
+    } 
     console.log(paceValue, paceFrames);
 }
 
