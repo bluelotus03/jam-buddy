@@ -135,7 +135,7 @@ function setPaceFrames(value) {
                 paceFrames = -5;
                 break;
             case 'hardcore':
-                paceFrames = 0;
+                paceFrames = -10;
                 break;
         }
     }  
@@ -203,7 +203,7 @@ const animationStates = [
     {
         name: 'sad',
         numOfFrames: 12,
-        defaultPace: 10,
+        defaultPace: 15,
     }, 
     {
         name: 'happy',
