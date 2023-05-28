@@ -26,17 +26,27 @@
                     </select>
                 </div>
                 <div class="controls">
-                    <label for="songs" name="songs">Choose a Jam:</label>
-                    <select id="songs" name="songs">
-                        <option value="idle">Let's listen to..</option>
-                        <option value="sad">Indie Song</option>
-                        <option value="happy">Pop Song</option>
-                        <option value="rage">Rock Song</option>
+                    <label for="pace" name="pace">Choose a Pace:</label>
+                    <select id="pace" name="pace">
+                        <option value="default">The song is...</option>
+                        <option value="chill">Chill</option>
+                        <option value="upbeat">Upbeat</option>
+                        <option value="hardcore">Hardcore</option>
                     </select>
                 </div>
             </div>
-            <div class="countdown_wrapper">
-                <div class="countdown">COUNTDOWN!!!</div>
+            <div class="controls countdown_wrapper">
+                <label for="time" name="time">Choose a Time:</label>
+                <select id="time" name="time">
+                    <option value="default">Timeless</option>
+                    <option value="10sec">10 seconds</option>
+                    <option value="30sec">30 seconds</option>
+                    <option value="1min">1 minute</option>
+                    <option value="5min">5 minutes</option>
+                    <option value="10min">10 minutes</option>
+                </select>
+                <button id="startTime" onclick="startTime()" class="regular_button">Start Time</button>
+                <button id="stopTime" onclick="stopTime()" class="regular_button">Stop Time</button>
             </div>
         </div>
         <canvas class="canvas" id="canvas1"></canvas>

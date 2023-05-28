@@ -10,9 +10,14 @@ show_app_info = function() {
     meta_wrapper.style.visibility = 'visible';
 }
 
+/* --------------  INFO PAGE LOGIC --------------- */
+
+// If user has already clicked "ok" for the info box previously, go straight to the jam page
 if (cookies.split(';').some((item) => item.trim().startsWith('accepted='))) {
     dialog.close();
     show_app_info();
+
+// If it's the user's first visit to the info page, wait for clicking "ok" to close the info box and go to the jam page
 } else {
     dialog.show();
     document.querySelector('#close').onclick = function() {
@@ -21,20 +26,146 @@ if (cookies.split(';').some((item) => item.trim().startsWith('accepted='))) {
         document.cookie = 'accepted=true';
     };
 }
+
+/* -------------  COUNTDOWN LOGIC ---------- */
+let timeInterval = 'default';
+let countTime = 0;
+
+const timeDropdown = document.getElementById('time');
+const timerStartButton = document.getElementById('startTime');
+const timerStopButton = document.getElementById('stopTime');
+
+// Use event listener to detect change in the dropdown
+timeDropdown.addEventListener('change', function(e){
+
+    // When the event listener detects a change, timeInterval is set to that new value
+    timeInterval = e.target.value;
+
+    if (timeInterval == 'default') {
+        console.log('Switched to timeless.. nothing to do here');
+
+    } else {
+        switch(timeInterval) {
+            case '10sec':
+                countTime = 10000;
+                break;
+            case '30sec':
+                countTime = 30000;
+                break;
+            case '1min':
+                countTime = 60000;
+                break;
+            case '5min':
+                countTime = 300000;
+                break;
+            case '10min':
+                countTime = 600000;
+                break;
+        }
+
+        timerStartButton.style.visibility = 'visible';
+        timerStartButton.style.display = 'block';
+    }
+
+});
+
+let timeStatus;
+
+// Learned about setTimeout with https://www.w3schools.com/js/tryit.asp?filename=tryjs_settimeout2
+function startTime() {
+    timeStatus = setTimeout(goToEndPage, countTime);
+    timerStopButton.style.visibility = 'visible';
+    timerStopButton.style.display = 'block';
+    timerStartButton.style.backgroundColor = 'rgb(75, 75, 75)';
+
+    console.log('Starting timer for ' + timeInterval);
+}
+
+function stopTime() {
+    timerStartButton.style.visibility = 'hidden';
+    timerStartButton.style.display = 'none';
+
+    timerStopButton.style.visibility = 'hidden';
+    timerStopButton.style.display = 'none';
+
+    console.log('Stopping timer');
+    clearTimeout(timeStatus);
+
+    selectTime('default');
+}
+
+function goToEndPage() {
+    // nav to end page
+    window.location = '/';
+}
+
+function selectTime(timeValue) {
+    timeDropdown.value = timeValue;
+}
+
+/* -------------  SONG PACE STATES LOGIC ---------- */
+
+const paceDropdown = document.getElementById('pace');
+let paceValue = paceDropdown.value;
+
+let paceFrames = 0;
+
+function setPaceFrames(value) { 
+
+    // When the event listener detects a change, playerState is set to that new value
+    paceValue = value;
+
+    if (playerState == 'happy') {
+        switch (paceValue) {
+            case 'chill':
+                paceFrames = 10;
+                break;
+            case 'upbeat':
+                paceFrames = -3;
+                break;
+            case 'hardcore':
+                paceFrames = -10;
+                break;
+        }
+    } else if (playerState == 'sad') {
+        switch (paceValue) {
+            case 'chill':
+                paceFrames = 10;
+                break;
+            case 'upbeat':
+                paceFrames = -5;
+                break;
+            case 'hardcore':
+                paceFrames = -10;
+                break;
+        }
+    }  
+    else if (playerState == 'rage') {
+        switch (paceValue) {
+            case 'chill':
+                paceFrames = 0;
+                break;
+            case 'upbeat':
+                paceFrames = -30;
+                break;
+            case 'hardcore':
+                paceFrames = -40;
+                break;
+        }
+    } 
+    console.log(paceValue, paceFrames);
+}
+
+
+
+/* -------------  ANIMATION STATES LOGIC ---------- */
+
 // Default state
-playerState = 'idle';
+let playerState = 'idle';
+let defaultPace = 65;
 
 // Gets the dropdown element
 const dropdown = document.getElementById('animations');
-
-// Use event listener to detect change in the dropdown
-dropdown.addEventListener('change', function(e){
-
-    // When the event listener detects a change, playerState is set to that new value
-    // target is referring to an element that was clicked
-    playerState = e.target.value;
-
-})
 
 // You could also pass webgl to get access to a different set of methods
 const ctx = canvas.getContext('2d');
@@ -46,7 +177,6 @@ const CANVAS_WIDTH = canvas.width = 600;
 const CANVAS_HEIGHT = canvas.height = 600;
 
 // Bring image into the JS project (built in Image class constructor)
-// This Image class will create an image element
 const playerImage = new Image();
 
 playerImage.src = 'po-animations.png';
@@ -61,9 +191,6 @@ const spriteHeight = 523;
 // Used to count frame rate and work with staggerFrames in the animate() function
 gameFrame = 0;
 
-// Will slow down animation by that amount -- higher the number, the slower the animation will be 
-const staggerFrames = 10;
-
 // Stores all the positions of sprites for a given animation (row) as calculated in forEach() below
 const spriteAnimations = [];
 
@@ -72,24 +199,48 @@ const animationStates = [
     {
         name: 'idle',
         numOfFrames: 12,
+        defaultPace: defaultPace,
     },
     {
         name: 'sad',
         numOfFrames: 12,
+        defaultPace: 15,
     }, 
     {
         name: 'happy',
         numOfFrames: 10,
+        defaultPace: 20,
     },
     {
         name: 'rage',
         numOfFrames: 12,
+        defaultPace: 50,
     },
 ];
 
+let staggerFrames = defaultPace + paceFrames;
+
+// Use event listener to detect change in the dropdown
+dropdown.addEventListener('change', function(e){
+
+    // When the event listener detects a change, playerState is set to that new value
+    playerState = e.target.value;
+
+    // Will slow down animation by that amount -- higher the number, the slower the animation will be 
+    defaultPace = animationStates.filter(currentState => currentState.name == playerState)[0].defaultPace;
+
+});
+
+
+// Use event listener to detect change in the dropdown
+paceDropdown.addEventListener('change', function(e){
+    setPaceFrames(e.target.value);
+    staggerFrames = defaultPace + paceFrames;
+    console.log('stagger frames ' + staggerFrames);
+});
+
+
 // This callback function will run for each element in the animationStates array
-// state - object in animation state being accessed
-// index - stores num of each element as we cycle through the array
 animationStates.forEach((state, index) => {
     let frames = {
         loc: [],
@@ -121,43 +272,18 @@ console.log(spriteAnimations);
 function animate() { 
 
     // Clear previous drawing for each animation frame
-    // Takes in args to specify what area we want to clear, here we are clearing entire area
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
-    // Cycle through horizontal sprite sheets
-    // Math.floor - get rid of decimal points, 6 - last number in idle animation frames currently being used
-    // gameFrame is an ever increasing number, and staggerFrames is always 5
+    // Cycle through the sprite sheet
     let position = Math.floor(gameFrame / staggerFrames) % spriteAnimations[playerState].loc.length;
 
-    // position will cycle between 0 and the number specified last (6)
     // X -> travels through sprite sheet horizontally
     let frameX = spriteWidth * position;
 
     // Y -> travels through sprite sheet vertically
     let frameY = spriteAnimations[playerState].loc[position].y;
 
-    // For working with sprite animations - most interested in canvas drawImage() method
-    // You can pass it 3, 5, or 9 args depending on how much control you want to have over the image 
-
-    // If passing 5 args (Second - Fifth args are used to position and stretch entire image):
-        // First arg - the image you want to draw
-        // Second & Third args - x and y coordinates 
-        // Fourth & Fifth args (if passing 5 args instead of 3) - width and height of the image
-        // EXAMPLE: ctx.drawImage(playerImage, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-
-    // If passing 9 args:
-        // First arg - the image you want to draw 
-        // Second - Fifth args (src info/cropping) - determine rectangular area we want to cut out from the src image (x, y, width, height)
-        // Sixth - Ninth args (canvas destination info) - where on canvas to draw that cropped part of the image (x, y, width, height)
-        // ctx.drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh);
-
-    // Multiplying spriteWidth and spriteHeight by a number allows you to use a different frame in that row or column
-        // 0 * the width or height is the first sprite on the sheet
-        // 1 * the width or height is the second sprite on the sheet, and so on
-        // EXAMPLE: 0 * spriteWidth, 0 * spriteHeight is the sprite in first row and column (top left)
-        // EXAMPLE: 0 * spriteWidth, 1 * spriteHeight is the sprite in second row and first column (left and first down)
-        
-        // We can remove * spriteWidth from frameX now because it is getting calculated previously
+        // For working with sprite animations
         ctx.drawImage(playerImage, frameX, frameY, spriteWidth, spriteHeight, 10, 30, spriteWidth, spriteHeight);
 
     gameFrame++;
