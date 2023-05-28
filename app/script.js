@@ -76,15 +76,13 @@ function startTime() {
     timeStatus = setTimeout(goToEndPage, countTime);
     timerStopButton.style.visibility = 'visible';
     timerStopButton.style.display = 'block';
-    timerStartButton.style.backgroundColor = 'rgb(75, 75, 75)';
+    timerStartButton.style.visibility = 'hidden';
+    timerStartButton.style.display = 'none';
 
     console.log('Starting timer for ' + timeInterval);
 }
 
 function stopTime() {
-    timerStartButton.style.visibility = 'hidden';
-    timerStartButton.style.display = 'none';
-
     timerStopButton.style.visibility = 'hidden';
     timerStopButton.style.display = 'none';
 
