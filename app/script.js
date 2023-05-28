@@ -161,7 +161,7 @@ function setPaceFrames(value) {
 
 // Default state
 let playerState = 'idle';
-let defaultPace = 10;
+let defaultPace = 65;
 
 // Gets the dropdown element
 const dropdown = document.getElementById('animations');
@@ -235,6 +235,7 @@ dropdown.addEventListener('change', function(e){
 paceDropdown.addEventListener('change', function(e){
     setPaceFrames(e.target.value);
     staggerFrames = defaultPace + paceFrames;
+    console.log('stagger frames ' + staggerFrames);
 });
 
 
