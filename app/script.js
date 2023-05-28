@@ -142,13 +142,13 @@ function setPaceFrames(value) {
     else if (playerState == 'rage') {
         switch (paceValue) {
             case 'chill':
-                paceFrames = 10;
+                paceFrames = 0;
                 break;
             case 'upbeat':
-                paceFrames = -5;
+                paceFrames = -30;
                 break;
             case 'hardcore':
-                paceFrames = 0;
+                paceFrames = -40;
                 break;
         }
     } 
