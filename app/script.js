@@ -76,6 +76,7 @@ function startTime() {
     timeStatus = setTimeout(goToEndPage, countTime);
     timerStopButton.style.visibility = 'visible';
     timerStopButton.style.display = 'block';
+    timerStartButton.style.backgroundColor = 'rgb(75, 75, 75)';
 
     console.log('Starting timer for ' + timeInterval);
 }

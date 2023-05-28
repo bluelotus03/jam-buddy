@@ -17,15 +17,6 @@
         <div class="meta_wrapper">
             <div class="controls_wrapper">
                 <div class="controls">
-                    <label for="pace" name="pace">Choose a Pace:</label>
-                    <select id="pace" name="pace">
-                        <option value="default">The song is...</option>
-                        <option value="chill">Chill</option>
-                        <option value="upbeat">Upbeat</option>
-                        <option value="hardcore">Hardcore</option>
-                    </select>
-                </div>
-                <div class="controls">
                     <label for="animations" name="animations">Choose a Vibe:</label>
                     <select id="animations" name="animations">
                         <option value="idle">We're feeling...</option>
@@ -34,8 +25,17 @@
                         <option value="rage">Rage</option>
                     </select>
                 </div>
+                <div class="controls">
+                    <label for="pace" name="pace">Choose a Pace:</label>
+                    <select id="pace" name="pace">
+                        <option value="default">The song is...</option>
+                        <option value="chill">Chill</option>
+                        <option value="upbeat">Upbeat</option>
+                        <option value="hardcore">Hardcore</option>
+                    </select>
+                </div>
             </div>
-            <div class="countdown_wrapper">
+            <div class="controls countdown_wrapper">
                 <label for="time" name="time">Choose a Time:</label>
                 <select id="time" name="time">
                     <option value="default">Timeless</option>
@@ -45,8 +45,8 @@
                     <option value="5min">5 minutes</option>
                     <option value="10min">10 minutes</option>
                 </select>
-                <button id="startTime" onclick="startTime()">Start Time</button>
-                <button id="stopTime" onclick="stopTime()">Stop Time</button>
+                <button id="startTime" onclick="startTime()" class="regular_button">Start Time</button>
+                <button id="stopTime" onclick="stopTime()" class="regular_button">Stop Time</button>
             </div>
         </div>
         <canvas class="canvas" id="canvas1"></canvas>
