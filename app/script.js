@@ -26,7 +26,7 @@ show_app_info = function() {
 //         document.cookie = 'accepted=true';
 //     };
 // }
-show_app_info();
+// show_app_info();
 
 /* -------------  COUNTDOWN LOGIC ---------- */
 let timeInterval = 'default';
@@ -159,6 +159,23 @@ function setPaceFrames(value) {
 
 /* -------------  ANIMATION STATES LOGIC ---------- */
 
+ /**
+  * Conserve aspect ratio of the original region. Useful when shrinking/enlarging
+  * images to fit into a certain area. Source: https://stackoverflow.com/a/14731922
+  *
+  * @param {Number} srcWidth width of source image
+  * @param {Number} srcHeight height of source image
+  * @param {Number} maxWidth maximum available width
+  * @param {Number} maxHeight maximum available height
+  * @return {Object} { width, height }
+  */
+ function calculateAspectRatioFit(srcWidth, srcHeight, maxWidth, maxHeight) {
+
+    var ratio = Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
+
+    return { width: srcWidth*ratio, height: srcHeight*ratio };
+ }
+
 // Default state
 let playerState = 'idle';
 let defaultPace = 65;
@@ -172,8 +189,8 @@ const ctx = canvas.getContext('2d');
 console.log(ctx);
 
 // Global size variables
-const CANVAS_WIDTH = canvas.width = 600;
-const CANVAS_HEIGHT = canvas.height = 600;
+const CANVAS_WIDTH = canvas.width = window.innerWidth * .65;
+const CANVAS_HEIGHT = canvas.height = window.innerHeight * .80;
 
 // Bring image into the JS project (built in Image class constructor)
 const playerImage = new Image();
@@ -186,6 +203,10 @@ const spriteWidth = 575;
 
 // Divide height of sprite sheet (5230px) by number of rows (10) to get height of 1 frame --> 523px 
 const spriteHeight = 523;
+
+const spriteSize = calculateAspectRatioFit(spriteWidth, spriteHeight, CANVAS_HEIGHT, CANVAS_WIDTH)
+const ANIMATION_WIDTH = spriteSize.width;
+const ANIMATION_HEIGHT = spriteSize.height;
 
 // Used to count frame rate and work with staggerFrames in the animate() function
 gameFrame = 0;
@@ -283,8 +304,7 @@ function animate() {
     let frameY = spriteAnimations[playerState].loc[position].y;
 
         // For working with sprite animations
-        ctx.drawImage(playerImage, frameX, frameY, spriteWidth, spriteHeight, 10, 30, spriteWidth, spriteHeight);
-
+        ctx.drawImage(playerImage, frameX, frameY, spriteWidth, spriteHeight, 10, 30, ANIMATION_WIDTH, ANIMATION_HEIGHT);
     gameFrame++;
     requestAnimationFrame(animate);
 }
