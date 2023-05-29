@@ -189,7 +189,7 @@ const ctx = canvas.getContext('2d');
 console.log(ctx);
 
 // Global size variables
-const CANVAS_WIDTH = canvas.width = window.innerWidth * .65;
+const CANVAS_WIDTH = canvas.width = window.innerWidth * .55;
 const CANVAS_HEIGHT = canvas.height = window.innerHeight * .80;
 
 // Bring image into the JS project (built in Image class constructor)
