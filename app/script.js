@@ -12,20 +12,21 @@ show_app_info = function() {
 
 /* --------------  INFO PAGE LOGIC --------------- */
 
-// If user has already clicked "ok" for the info box previously, go straight to the jam page
-if (cookies.split(';').some((item) => item.trim().startsWith('accepted='))) {
-    dialog.close();
-    show_app_info();
+// // If user has already clicked "ok" for the info box previously, go straight to the jam page
+// if (cookies.split(';').some((item) => item.trim().startsWith('accepted='))) {
+//     dialog.close();
+//     show_app_info();
 
-// If it's the user's first visit to the info page, wait for clicking "ok" to close the info box and go to the jam page
-} else {
-    dialog.show();
-    document.querySelector('#close').onclick = function() {
-        dialog.close();
-        show_app_info();
-        document.cookie = 'accepted=true';
-    };
-}
+// // If it's the user's first visit to the info page, wait for clicking "ok" to close the info box and go to the jam page
+// } else {
+//     dialog.show();
+//     document.querySelector('#close').onclick = function() {
+//         dialog.close();
+//         show_app_info();
+//         document.cookie = 'accepted=true';
+//     };
+// }
+show_app_info();
 
 /* -------------  COUNTDOWN LOGIC ---------- */
 let timeInterval = 'default';
@@ -73,7 +74,7 @@ let timeStatus;
 
 // Learned about setTimeout with https://www.w3schools.com/js/tryit.asp?filename=tryjs_settimeout2
 function startTime() {
-    timeStatus = setTimeout(goToEndPage, countTime);
+    timeStatus = setTimeout(goToHomePage, countTime);
     timerStopButton.style.visibility = 'visible';
     timerStopButton.style.display = 'block';
     timerStartButton.style.visibility = 'hidden';
@@ -92,8 +93,8 @@ function stopTime() {
     selectTime('default');
 }
 
-function goToEndPage() {
-    // nav to end page
+function goToHomePage() {
+    // nav to home page
     window.location = '/';
 }
 

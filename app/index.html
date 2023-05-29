@@ -7,11 +7,16 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="navbar" id="navbar">
+        <a onclick="goToHomePage()" class="icon">
+          <img class="navbar-logo" src="../JamBuddyTitle.png" alt="Jam Buddy Logo"></img>
+        </a>
+      </div>
     <div class="main_wrapper">
-        <dialog>
+        <!-- <dialog>
             <p>This is a dialog</p>
             <button id="close">Close dialog</button>
-        </dialog>
+        </dialog> -->
         <!-- Introduced in HTML 5 that creates a canvas we can use to draw interactive graphics with JS -->
         <!-- By default, canvas elements are transparent, so you can layer multiple canvas elements if you want to -->
         <div class="meta_wrapper">
@@ -49,7 +54,13 @@
                 <button id="stopTime" onclick="stopTime()" class="regular_button">Stop Time</button>
             </div>
         </div>
-        <canvas class="canvas" id="canvas1"></canvas>
+        <div class="main_stage">
+            <canvas class="canvas" id="canvas1"></canvas>
+            <div class="tunes">
+                <label for="pace" name="pace" class="controls">Choose a Tune:</label>
+                <iframe width="360" height="215" src="https://www.youtube.com/embed/videoseries?list=PLxG0x9l83vZe407o0shU62CLpErR7d7ki" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+        </div>
     </div>
 
 
