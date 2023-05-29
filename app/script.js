@@ -117,13 +117,13 @@ function setPaceFrames(value) {
     if (playerState == 'happy') {
         switch (paceValue) {
             case 'chill':
-                paceFrames = 10;
+                paceFrames = 25;
                 break;
             case 'upbeat':
-                paceFrames = -3;
+                paceFrames = 5;
                 break;
             case 'hardcore':
-                paceFrames = -10;
+                paceFrames = -5;
                 break;
         }
     } else if (playerState == 'sad') {
